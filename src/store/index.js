@@ -1,6 +1,10 @@
 import { createStore } from 'vuex'
+import { authModule } from './auth'
 
 export default createStore({
+  modules: {
+    auth: authModule
+  },
   state: () => ({
     cart: []
   }),
@@ -15,6 +19,14 @@ export default createStore({
     },
     removeFromCart(state, productId) {
       state.cart = state.cart.filter(p => p.id !== productId)
+    }
+  },
+  actions: {
+    addToCart(context, product) {
+      context.commit('addToCart', product)
+    },
+    removeFromCart(context, productId) {
+      context.commit('removeFromCart', productId)
     }
   },
   getters: {
